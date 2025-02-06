@@ -1,0 +1,16 @@
+{
+    "image": "mcr.microsoft.com/devcontainers/rust:latest", // Imagem Docker com Rust pré-instalado
+    "features": {}, // Aqui você pode adicionar recursos opcionais (se necessário)
+    "customizations": {
+      "vscode": {
+        "extensions": [
+          "rust-lang.rust-analyzer" // Extensão do VS Code para Rust
+        ],
+        "settings": {
+          "rust-analyzer.checkOnSave.command": "clippy" // Configuração para usar clippy ao salvar arquivos
+        }
+      }
+    },
+    "postCreateCommand": "rustup component add rust-analyzer && cargo install cargo-watch", // Comando para instalar ferramentas úteis
+    "forwardPorts": [3000] // Portas para redirecionar (opcional)
+  }

@@ -1,4 +1,4 @@
-use blockchain::balances::Pallet;
+use blockchain_rust::balances::{Pallet, Balance};
 
 #[test]
 pub fn init_balances() {
@@ -34,7 +34,7 @@ fn transfer_balance() {
     assert_eq!(balances.balance(&"lucas".to_string() ), 6 );
     assert_eq!(balances.balance(&"pedro".to_string() ), 4 );
 
-    balances.set_balance(&"pedro".to_string(), u128::MAX);
+    balances.set_balance(&"pedro".to_string(), Balance::MAX);
     assert_eq!(balances.transfer(&"lucas".to_string(), &"pedro".to_string() , 1), Err("Overflow") );
 
 

@@ -1,4 +1,4 @@
-use blockchain::system::Pallet;
+use blockchain_rust::system::Pallet;
 
 #[test]
 fn init_system(){

@@ -1,13 +1,13 @@
 [package]
-name = "blockchain"
+name = "blockchain_rust"
 version = "0.1.0"
 edition = "2021"
 
 [dependencies]
+num = "0.4.3"
 
-[dev-dependencies]
-blockchain = { path = "." }
+
 
 [lib]
-name = "blockchain"
+name = "blockchain_rust"
 path = "src/lib.rs"

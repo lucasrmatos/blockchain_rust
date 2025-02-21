@@ -1,12 +1,21 @@
 // use blockchain::balances::Pallet;
 // use blockchain::system::Pallet;
 
-mod system;
+//use balances::{AccId, Balance};
+
+
 mod balances;
+mod system;
+
+mod types{
+    pub type AccId = String;
+    pub type Balance = u128;    
+}
+
 
 #[derive(Debug)]
 pub struct Runtime {
-    balances: balances::Pallet,
+    balances: balances::Pallet<types::AccId, types::Balance>,
     system: system::Pallet,
 }
 

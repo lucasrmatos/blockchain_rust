@@ -1,8 +1,8 @@
-use blockchain_rust::system::Pallet;
+use blockchain_rust::system::{Pallet, BlockNumber, AccId, Nonce};
 
 #[test]
 fn init_system(){
-    let mut system = Pallet::new();
+    let mut system: blockchain_rust::system::Pallet<BlockNumber, String, i32>  = Pallet::new();
 
     assert_eq!(system.block_number(), 0);
     assert_eq!(system.get_nonce(&"lucas".to_string()), None);

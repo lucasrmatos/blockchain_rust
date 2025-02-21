@@ -1,6 +1,5 @@
 // use blockchain::balances::Pallet;
 // use blockchain::system::Pallet;
-
 //use balances::{AccId, Balance};
 
 
@@ -8,15 +7,17 @@ mod balances;
 mod system;
 
 mod types{
+    pub type Balance = u128;  
     pub type AccId = String;
-    pub type Balance = u128;    
+    pub type BlockNumber = u64;
+    pub type Nonce = u32;  
 }
 
 
 #[derive(Debug)]
 pub struct Runtime {
     balances: balances::Pallet<types::AccId, types::Balance>,
-    system: system::Pallet,
+    system: system::Pallet<types::BlockNumber, types::AccId, types::Nonce>
 }
 
 impl Runtime {

@@ -1,8 +1,17 @@
-use blockchain_rust::system::{Pallet, BlockNumber, AccId, Nonce};
+use blockchain_rust::system::{Config, Pallet};
+
+pub struct TestConfig;
+
+
+impl Config for TestConfig{
+    type AccId = String;
+    type BlockNumber = u64 ;
+    type Nonce = u32;
+}
 
 #[test]
 fn init_system(){
-    let mut system: blockchain_rust::system::Pallet<BlockNumber, String, i32>  = Pallet::new();
+    let mut system: Pallet<TestConfig>  = Pallet::new();
 
     assert_eq!(system.block_number(), 0);
     assert_eq!(system.get_nonce(&"lucas".to_string()), None);

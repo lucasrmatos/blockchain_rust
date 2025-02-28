@@ -1,20 +1,24 @@
 use std::collections::BTreeMap;
 use num::traits::{CheckedAdd, CheckedSub, Zero};
+use crate::support::DispatchResult;
 
+/*
 pub type AccId = String;
 pub type Balance = u128;
+ */
 
+pub trait Config: crate::system::Config {
+    // type AccId: Ord + Clone + ToString;
+    type Balance: CheckedAdd + CheckedSub + Zero + Copy;
+}
 
 #[derive(Debug)]
-pub struct Pallet <AccId, Balance> {
-    balances: BTreeMap <AccId, Balance>
+pub struct Pallet <T: Config> {
+    balances: BTreeMap <T::AccId, T::Balance>
 
 }
 
-impl <AccId, Balance> Pallet <AccId, Balance> 
-where 
-    AccId: Ord + Clone + ToString,
-    Balance: CheckedAdd + CheckedSub + Zero + Copy
+impl <T: Config> Pallet <T> 
 {
     pub fn new() -> Self {
         Pallet{
@@ -22,19 +26,19 @@ where
         }
     }
 
-    pub fn set_balance( &mut self, account: &AccId, amount: Balance){
+    pub fn set_balance( &mut self, account: &T::AccId, amount: T::Balance){
         self.balances.insert( account.clone(), amount);
         }
 
-    pub fn balance (&self, account: &AccId) -> Balance{
-        *self.balances.get( account).unwrap_or(&Balance::zero() )   
+    pub fn balance (&self, account: &T::AccId) -> T::Balance{
+        *self.balances.get( account).unwrap_or(&T::Balance::zero() )   
     }
 
     // #[allow(dead_code)]
     pub fn transfer( &mut self,
-        caller: &AccId,
-        to: &AccId, amount: Balance,) ->
-        Result<(), &'static str>{
+        caller: &T::AccId,
+        to: &T::AccId, amount: T::Balance,)
+        ->  DispatchResult{
 
         let caller_balance = self.balance(caller);
         let to_balance = self.balance(to);

@@ -37,8 +37,10 @@ impl <T:Config> Pallet <T>
         let nonce = * self.nonce.get(account).unwrap_or(&T::Nonce::zero()) + T::Nonce::from(1) ;
         self.nonce.insert(account.clone(), nonce);
     }    
+    /* 
     pub fn get_nonce( &self, account: &T::AccId) -> Option<&T::Nonce>{
         self.nonce.get(account)
     }
+    */
 
 }
